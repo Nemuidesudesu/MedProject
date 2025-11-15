@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "jdk",
+            "request": "launch",
+            "name": "Launch Java App"
+        },
+        {
+            "type": "java",
+            "name": "Запуск JavaFX GUI",
+            "request": "launch",
+            "mainClass": "com.medicalsystem.ui.MainFX",
+            "vmArgs": "--module-path ${workspaceFolder}/lib/javafx-sdk-25.0.1/lib --add-modules javafx.controls,javafx.fxml"
+        }
+
+    ]
+}
