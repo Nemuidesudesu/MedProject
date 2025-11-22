@@ -22,11 +22,15 @@ public class MainFX extends Application {
         patientsTab.setContent(new PatientsView());
         patientsTab.setClosable(false);
 
-        // Appointments tab — placeholder for now
+        // Appointments tab — full view
         Tab apptTab = new Tab("Приёмы");
-        StackPane apptPane = new StackPane(new Label("Раздел приёмов — TODO"));
-        apptTab.setContent(apptPane);
+        apptTab.setContent(new AppointmentsView());
         apptTab.setClosable(false);
+
+        // Doctors tab
+        Tab doctorsTab = new Tab("Врачи");
+        doctorsTab.setContent(new DoctorsView());
+        doctorsTab.setClosable(false);
 
         // About tab
         Tab aboutTab = new Tab("О программе");
@@ -34,7 +38,7 @@ public class MainFX extends Application {
         aboutTab.setContent(aboutPane);
         aboutTab.setClosable(false);
 
-        tabs.getTabs().addAll(patientsTab, apptTab, aboutTab);
+        tabs.getTabs().addAll(patientsTab, apptTab, doctorsTab, aboutTab);
 
         Scene scene = new Scene(tabs, 1000, 600);
         stage.setScene(scene);

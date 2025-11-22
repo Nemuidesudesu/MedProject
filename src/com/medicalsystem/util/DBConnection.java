@@ -28,13 +28,23 @@ public class DBConnection {
                     phone TEXT
                 );
 
+                CREATE TABLE IF NOT EXISTS doctors (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    first_name TEXT NOT NULL,
+                    last_name TEXT NOT NULL,
+                    specialization TEXT,
+                    phone TEXT,
+                    email TEXT
+                );
+
                 CREATE TABLE IF NOT EXISTS appointments (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     patient_id INTEGER,
-                    date TEXT NOT NULL,
-                    doctor TEXT,
+                    doctor_id INTEGER,
+                    date_time TEXT NOT NULL,
                     diagnosis TEXT,
-                    FOREIGN KEY (patient_id) REFERENCES patients (id)
+                    FOREIGN KEY (patient_id) REFERENCES patients (id),
+                    FOREIGN KEY (doctor_id) REFERENCES doctors (id)
                 );
                 """;
 
