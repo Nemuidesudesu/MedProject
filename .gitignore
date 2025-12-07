@@ -1,0 +1,7 @@
+*.class
+out/
+.classpath
+.project
+.settings/
+*.db
+*.sqlite
