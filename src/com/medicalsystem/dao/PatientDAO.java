@@ -8,9 +8,9 @@ import java.util.List;
 
 public class PatientDAO {
 
-    // ✅ Добавление пациента
+    // Добавление пациента
     public void addPatient(Patient patient) {
-        String sql = "INSERT INTO patients(first_name, last_name, birth_date, phone) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO patients(first_name, last_name, birth_date, phone, iin) VALUES(?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -18,17 +18,28 @@ public class PatientDAO {
             pstmt.setString(2, patient.getLastName());
             pstmt.setString(3, patient.getBirthDate());
             pstmt.setString(4, patient.getPhone());
+            pstmt.setString(5, patient.getIin());
             pstmt.executeUpdate();
 
-            System.out.println("✅ Пациент успешно добавлен: " +
+            System.out.println("Пациент успешно добавлен: " +
                     patient.getFirstName() + " " + patient.getLastName());
 
         } catch (SQLException e) {
-            System.err.println("Ошибка при добавлении пациента: " + e.getMessage());
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                if (e.getMessage().contains("phone")) {
+                    System.err.println("Ошибка: Пациент с таким номером телефона уже существует");
+                } else if (e.getMessage().contains("iin")) {
+                    System.err.println("Ошибка: Пациент с таким ИИН уже существует");
+                } else {
+                    System.err.println("Ошибка: Дублирующиеся данные пациента");
+                }
+            } else {
+                System.err.println("Ошибка при добавлении пациента: " + e.getMessage());
+            }
         }
     }
 
-    // ✅ Получение всех пациентов
+    // Получение всех пациентов
     public List<Patient> getAllPatients() {
         List<Patient> patients = new ArrayList<>();
         String sql = "SELECT * FROM patients";
@@ -43,7 +54,8 @@ public class PatientDAO {
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("birth_date"),
-                        rs.getString("phone")
+                        rs.getString("phone"),
+                        rs.getString("iin")
                 ));
             }
 
@@ -54,7 +66,7 @@ public class PatientDAO {
         return patients;
     }
 
-    // ✅ Удаление пациента по ID
+    // Удаление пациента по ID
     public boolean deletePatientById(int id) {
         String sql = "DELETE FROM patients WHERE id = ?";
         try (Connection conn = DBConnection.connect();
@@ -70,9 +82,9 @@ public class PatientDAO {
         }
     }
 
-    // ✅ Обновление данных пациента
+    // Обновление данных пациента
     public boolean updatePatient(Patient patient) {
-        String sql = "UPDATE patients SET first_name = ?, last_name = ?, birth_date = ?, phone = ? WHERE id = ?";
+        String sql = "UPDATE patients SET first_name = ?, last_name = ?, birth_date = ?, phone = ?, iin = ? WHERE id = ?";
         try (Connection conn = DBConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -80,14 +92,15 @@ public class PatientDAO {
             pstmt.setString(2, patient.getLastName());
             pstmt.setString(3, patient.getBirthDate());
             pstmt.setString(4, patient.getPhone());
-            pstmt.setInt(5, patient.getId());
+            pstmt.setString(5, patient.getIin());
+            pstmt.setInt(6, patient.getId());
 
             int rows = pstmt.executeUpdate();
             if (rows > 0) {
-                System.out.println("✅ Пациент обновлён: " + patient.getFirstName() + " " + patient.getLastName());
+                System.out.println(" Пациент обновлён: " + patient.getFirstName() + " " + patient.getLastName());
                 return true;
             } else {
-                System.out.println("❌ Пациент не найден для обновления (ID=" + patient.getId() + ")");
+                System.out.println(" Пациент не найден для обновления (ID=" + patient.getId() + ")");
                 return false;
             }
 
@@ -95,5 +108,27 @@ public class PatientDAO {
             System.err.println("Ошибка при обновлении пациента: " + e.getMessage());
             return false;
         }
+    }
+
+    public Patient getPatientById(int id) {
+        String sql = "SELECT id, first_name, last_name, birth_date, phone, iin FROM patients WHERE id = ?";
+        try (Connection conn = DBConnection.connect(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Patient(
+                            rs.getInt("id"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getString("birth_date"),
+                            rs.getString("phone"),
+                            rs.getString("iin")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Ошибка при поиске пациента по ID: " + e.getMessage());
+        }
+        return null;
     }
 }

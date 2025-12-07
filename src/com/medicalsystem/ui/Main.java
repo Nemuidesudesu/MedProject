@@ -42,8 +42,10 @@ public class Main {
         String birthDate = scanner.nextLine();
         System.out.print("Телефон: ");
         String phone = scanner.nextLine();
+        System.out.print("ИИН: ");
+        String iin = scanner.nextLine();
 
-        Patient patient = new Patient(firstName, lastName, birthDate, phone);
+        Patient patient = new Patient(firstName, lastName, birthDate, phone, iin);
         dao.addPatient(patient);
     }
 
@@ -56,14 +58,15 @@ public class Main {
         }
 
         System.out.println("\n Список пациентов:");
-        System.out.println("ID | Имя | Фамилия | Дата рождения | Телефон");
+        System.out.println("ID | Имя | Фамилия | Дата рождения | Телефон | ИИН");
         for (Patient p : patients) {
-            System.out.printf("%d | %s | %s | %s | %s%n",
+            System.out.printf("%d | %s | %s | %s | %s | %s%n",
                     p.getId(),
                     p.getFirstName(),
                     p.getLastName(),
                     p.getBirthDate(),
-                    p.getPhone());
+                    p.getPhone(),
+                    p.getIin());
         }
     }
 

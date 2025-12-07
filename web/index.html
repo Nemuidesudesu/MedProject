@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Медицинская система — Веб интерфейс</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Медицинская система — Веб интерфейс</h1>
+    <nav>
+      <button id="tab-patients">Пациенты</button>
+      <button id="tab-doctors">Врачи</button>
+      <button id="tab-appointments">Записи</button>
+    </nav>
+  </header>
+  <main>
+    <section id="patients-section" class="tab">
+      <h2>Пациенты</h2>
+      <div class="actions">
+        <button id="open-create-patient" type="button">Открыть форму создания в новом окне</button>
+      </div>
+      <p>.</p>
+      <table id="patients-table"></table>
+    </section>
+    <section id="doctors-section" class="tab" style="display:none">
+      <h2>Врачи</h2>
+      <div class="actions">
+        <button id="open-create-doctor" type="button">Открыть форму создания в новом окне</button>
+      </div>
+      <p>.</p>
+      <table id="doctors-table"></table>
+    </section>
+    <section id="appointments-section" class="tab" style="display:none">
+      <h2>Записи</h2>
+      <div class="actions">
+        <button id="open-create-appointment" type="button">Открыть форму создания в новом окне</button>
+      </div>
+      <p>.</p>
+      <table id="appointments-table"></table>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

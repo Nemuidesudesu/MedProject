@@ -1,0 +1,19 @@
+body{font-family: Arial, Helvetica, sans-serif; margin:0; padding:0;}
+header{background:#2c3e50;color:white;padding:12px}
+header h1{margin:0;font-size:18px}
+nav{margin-top:8px}
+nav button{margin-right:6px;padding:6px 10px}
+main{padding:12px}
+form input, form select {margin-right:6px;padding:6px}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{border:1px solid #ddd;padding:8px;text-align:left}
+tr:nth-child(even){background:#f9f9f9}
+
+/* Styles for open-in-new-window buttons and action buttons in tables */
+.actions{margin-bottom:8px}
+.actions button{background:#2980b9;color:#fff;border:none;padding:8px 12px;border-radius:4px;cursor:pointer}
+.actions button:hover{background:#1f6f9a}
+.table-action-btn{background:#ecf0f1;border:1px solid #bdc3c7;padding:6px 8px;border-radius:4px;cursor:pointer;margin-right:6px}
+.table-action-btn.edit{background:#27ae60;color:#fff;border:none}
+.table-action-btn.delete{background:#c0392b;color:#fff;border:none}
+.table-action-btn:hover{opacity:0.9}

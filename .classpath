@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.CLASSPATH"/>
+  <!-- Project output -->
+  <classpathentry kind="output" path="out"/>
+
+  <!-- External libraries -->
+  <classpathentry kind="lib" path="lib/sqlite-jdbc-3.45.3.0.jar"/>
+  <classpathentry kind="lib" path="lib/slf4j-api-2.0.13.jar"/>
+  <classpathentry kind="lib" path="lib/slf4j-simple-2.0.13.jar"/>
+
+  <!-- JavaFX SDK jars -->
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/javafx.base.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/javafx.controls.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/javafx.fxml.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/javafx.graphics.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/javafx.media.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/javafx.swing.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/javafx.web.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/jdk.jsobject.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/jfx.incubator.input.jar"/>
+  <classpathentry kind="lib" path="lib/javafx-sdk-25.0.1/lib/jfx.incubator.richtext.jar"/>
+</classpath>

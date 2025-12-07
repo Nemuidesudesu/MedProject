@@ -11,7 +11,8 @@
             "name": "Запуск JavaFX GUI",
             "request": "launch",
             "mainClass": "com.medicalsystem.ui.MainFX",
-            "vmArgs": "-Dfile.encoding=UTF-8 --module-path ${workspaceFolder}/lib/javafx-sdk-25.0.1/lib --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "-Dfile.encoding=UTF-8 --module-path \"${workspaceFolder}/lib/javafx-sdk-25.0.1/lib\" --add-modules javafx.controls,javafx.fxml",
+            "preLaunchTask": "javac: build with JavaFX"
         }
 
     ]

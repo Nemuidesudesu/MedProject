@@ -11,7 +11,7 @@ public class TestPatients {
         repo.addPatient("Дамир", "Серик", "2001-08-22", "+77087654321");
 
         // Выведем всех пациентов
-        System.out.println("\n📋 Список пациентов:");
+        System.out.println("\n Список пациентов:");
         for (String p : repo.getAllPatients()) {
             System.out.println(p);
         }

@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "javac: build with JavaFX",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "javac --module-path \"lib/javafx-sdk-25.0.1/lib\" --add-modules javafx.controls,javafx.fxml -cp \"lib/*;src\" -d out src/com/medicalsystem/ui/*.java src/com/medicalsystem/dao/*.java src/com/medicalsystem/model/*.java src/com/medicalsystem/util/*.java src/com/medicalsystem/repository/*.java"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": ["$javac"]
+    },
+    {
+      "label": "javac: build",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "javac -cp \"lib/*;src\" -d out src/com/medicalsystem/ui/*.java src/com/medicalsystem/dao/*.java src/com/medicalsystem/model/*.java src/com/medicalsystem/util/*.java src/com/medicalsystem/repository/*.java"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": ["$javac"]
+    }
+  ]
+}

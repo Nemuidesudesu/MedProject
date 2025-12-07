@@ -20,7 +20,7 @@ public class PatientRepository {
             pstmt.setString(4, phone);
             pstmt.executeUpdate();
 
-            System.out.println("✅ Пациент успешно добавлен: " + firstName + " " + lastName);
+            System.out.println("Пациент успешно добавлен: " + firstName + " " + lastName);
         } catch (SQLException e) {
             System.err.println("Ошибка при добавлении пациента: " + e.getMessage());
         }

@@ -7,24 +7,27 @@ public class Doctor {
     private String specialization;
     private String phone;
     private String email;
+    private String iin;
 
     public Doctor() {}
 
-    public Doctor(String firstName, String lastName, String specialization, String phone, String email) {
+    public Doctor(String firstName, String lastName, String specialization, String phone, String email, String iin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialization = specialization;
         this.phone = phone;
         this.email = email;
+        this.iin = iin;
     }
 
-    public Doctor(int id, String firstName, String lastName, String specialization, String phone, String email) {
+    public Doctor(int id, String firstName, String lastName, String specialization, String phone, String email, String iin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialization = specialization;
         this.phone = phone;
         this.email = email;
+        this.iin = iin;
     }
 
     public int getId() {
@@ -73,6 +76,14 @@ public class Doctor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getIin() {
+        return iin;
+    }
+
+    public void setIin(String iin) {
+        this.iin = iin;
     }
 
     public String getFullName() {
