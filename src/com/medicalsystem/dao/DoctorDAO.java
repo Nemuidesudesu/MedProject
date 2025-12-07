@@ -56,7 +56,28 @@ public class DoctorDAO {
         return list;
     }
 
+    public boolean hasAppointments(int doctorId) {
+        String sql = "SELECT COUNT(*) FROM appointments WHERE doctor_id = ?";
+        try (Connection conn = DBConnection.connect(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, doctorId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Ошибка при проверке записей врача: " + e.getMessage());
+        }
+        return false;
+    }
+
     public boolean deleteDoctorById(int id) {
+        // Проверяем, есть ли у врача записи о приемах
+        if (hasAppointments(id)) {
+            System.err.println("Ошибка: Невозможно удалить врача. У него есть записи о приемах");
+            return false;
+        }
+
         String sql = "DELETE FROM doctors WHERE id = ?";
         try (Connection conn = DBConnection.connect(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);

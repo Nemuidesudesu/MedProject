@@ -111,7 +111,11 @@ public class MainWeb {
                     Map<String, String> q = parseQuery(query);
                     int id = Integer.parseInt(q.getOrDefault("id", "0"));
                     boolean ok = dao.deletePatientById(id);
-                    sendResponse(exchange, ok ? 200 : 404, "{\"ok\":" + ok + "}", "application/json");
+                    if (ok) {
+                        sendResponse(exchange, 200, "{\"ok\":true}", "application/json");
+                    } else {
+                        sendResponse(exchange, 409, "{\"ok\":false,\"error\":\"Невозможно удалить пациента. У него есть записи о приемах\"}", "application/json");
+                    }
                     return;
                 }
             } catch (IOException | NumberFormatException e) {
@@ -152,7 +156,11 @@ public class MainWeb {
                     Map<String, String> q = parseQuery(query);
                     int id = Integer.parseInt(q.getOrDefault("id", "0"));
                     boolean ok = dao.deleteDoctorById(id);
-                    sendResponse(exchange, ok ? 200 : 404, "{\"ok\":" + ok + "}", "application/json");
+                    if (ok) {
+                        sendResponse(exchange, 200, "{\"ok\":true}", "application/json");
+                    } else {
+                        sendResponse(exchange, 409, "{\"ok\":false,\"error\":\"Невозможно удалить врача. У него есть записи о приемах\"}", "application/json");
+                    }
                     return;
                 }
             } catch (IOException | NumberFormatException e) {

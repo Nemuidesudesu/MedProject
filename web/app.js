@@ -61,7 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
     document.querySelectorAll('.del-patient').forEach(b => b.addEventListener('click', async (ev) => {
       const id = ev.target.dataset.id;
-      await fetch('/api/patients?id=' + id, { method: 'DELETE' });
+      const res = await fetch('/api/patients?id=' + id, { method: 'DELETE' });
+      const data = await res.json();
+      if (!data.ok) {
+        alert('Ошибка: ' + (data.error || 'Не удалось удалить пациента'));
+      }
       refreshPatients();
     }));
     // no inline patient select on main page
@@ -82,7 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
     document.querySelectorAll('.del-doctor').forEach(b => b.addEventListener('click', async (ev) => {
       const id = ev.target.dataset.id;
-      await fetch('/api/doctors?id=' + id, { method: 'DELETE' });
+      const res = await fetch('/api/doctors?id=' + id, { method: 'DELETE' });
+      const data = await res.json();
+      if (!data.ok) {
+        alert('Ошибка: ' + (data.error || 'Не удалось удалить врача'));
+      }
       refreshDoctors();
     }));
     // no inline doctor select on main page

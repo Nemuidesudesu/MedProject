@@ -66,8 +66,32 @@ public class PatientDAO {
         return patients;
     }
 
+    // Проверка, есть ли у пациента записи о приемах
+    public boolean hasAppointments(int patientId) {
+        String sql = "SELECT COUNT(*) FROM appointments WHERE patient_id = ?";
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, patientId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Ошибка при проверке записей пациента: " + e.getMessage());
+        }
+        return false;
+    }
+
     // Удаление пациента по ID
     public boolean deletePatientById(int id) {
+        // Проверяем, есть ли у пациента записи о приемах
+        if (hasAppointments(id)) {
+            System.err.println("Ошибка: Невозможно удалить пациента. У него есть записи о приемах");
+            return false;
+        }
+
         String sql = "DELETE FROM patients WHERE id = ?";
         try (Connection conn = DBConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
